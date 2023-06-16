@@ -52,7 +52,6 @@ ORDER BY country;
                     }
                         scanner.close();
 
-                    try (Connection con2 = DriverManager.getConnection(host, username, password)) {
                         query = """
                     SELECT GROUP_CONCAT(languages.language) as languages, countries.*, country_stats.* FROM `countries`
                     JOIN country_stats ON country_stats.country_id = countries.country_id
@@ -60,7 +59,7 @@ ORDER BY country;
                     JOIN languages ON country_languages.language_id = languages.language_id
                     WHERE countries.country_id = ? AND country_stats.year = (SELECT MAX(country_stats.year) FROM country_stats)
                     GROUP BY country_stats.year;""";
-                        try (PreparedStatement secondPs = con2.prepareStatement(query)) {
+                        try (PreparedStatement secondPs = con.prepareStatement(query)) {
                         secondPs.setInt(1, userCountryID);
                         try (ResultSet secondResult = secondPs.executeQuery()) {
                             if (secondResult.next()) {
@@ -75,7 +74,7 @@ ORDER BY country;
                         }
 
                     }
-                }
+
                 }
             }
 
