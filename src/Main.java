@@ -1,10 +1,3 @@
-// milestone 1
-// SELECT countries.country_id as country_id, countries.name as country, regions.name as region_name, continents.name as continent_name FROM `countries`
-//JOIN regions ON regions.region_id = countries.country_id
-//JOIN continents ON continents.continent_id = regions.continent_id
-//ORDER BY country
-
-import java.rmi.server.RemoteStub;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
